@@ -6,6 +6,7 @@ param tags {
 
 @secure()
 param gitHubAppKey string
+param clientId string
 
 var uniqueSuffix = uniqueString(subscription().id, location, project)
 
@@ -43,6 +44,7 @@ module keyVault '../modules/keyVault.bicep' = {
   params: {
     location: location
     project: project
+    clientId: clientId
     tags: union(tags, { module: 'keyVault.bicep' })
     uniqueSuffix: uniqueSuffix
   }

@@ -1,5 +1,6 @@
 param location string
 param project string
+param clientId string
 param tags {
   *: string
 }
@@ -16,7 +17,17 @@ resource kv 'Microsoft.KeyVault/vaults@2023-07-01' = {
       family: 'A'
       name: 'standard'
     }
-    tenantId: subscription().tenantId    
+    tenantId: subscription().tenantId
+    accessPolicies: [
+      {
+        tenantId: subscription().tenantId
+        objectId: clientId
+        permissions: {
+          keys: ['get', 'list', 'create', 'delete', 'backup', 'restore']
+          secrets: ['get', 'list', 'set', 'delete']
+          certificates: ['get', 'list', 'create', 'delete', 'import', 'update']
+        }
+      }]
   }
 }
 
