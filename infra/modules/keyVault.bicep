@@ -21,7 +21,7 @@ resource kv 'Microsoft.KeyVault/vaults@2023-07-01' = {
     accessPolicies: [
       {
         tenantId: subscription().tenantId
-        objectId: '1de63940-7a96-4460-a6e1-35312da88570'
+        objectId: clientId
         permissions: {
           keys: ['get', 'list', 'create', 'delete', 'backup', 'restore']
           secrets: ['get', 'list', 'set', 'delete']
